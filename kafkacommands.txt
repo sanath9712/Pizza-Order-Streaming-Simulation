@@ -1,0 +1,25 @@
+Setting up Kafka:
+
+cd ~/Downloads
+tar -xzf kafka_2.13-3.1.0.tgz
+cd kafka_2.13-3.1.0
+
+Starting Zookeeper:
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Starting Kafka:
+
+bin/kafka-server-start.sh config/server.properties
+
+Creating a Kafka topic:
+
+bin/kafka-topics.sh --create --topic pizza_orders --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
+
+Running the Kafka consumer:
+
+bin/kafka-console-consumer.sh --topic pizza_orders --from-beginning --bootstrap-server localhost:9092
+
+Starting Kafdrop (Kafka GUI):
+
+docker run -d --rm -p 9000:9000 -e KAFKA_BROKERCONNECT=localhost:9092 obsidiandynamics/kafdrop
